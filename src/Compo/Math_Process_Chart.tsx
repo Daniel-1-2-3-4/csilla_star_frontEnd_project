@@ -16,7 +16,7 @@ const fetchData = () => {
   return 2; // logic
 };
 
-const amount_of_lessons = 60;
+//const amount_of_lessons = 60;
 const percent = (fetchData() / 60) * 100;
 
 const chartData = [

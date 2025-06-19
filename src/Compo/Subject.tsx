@@ -1,4 +1,4 @@
-import { useState, type FC } from "react";
+import { type FC } from "react";
 import StarGitter from "./StarGitter";
 import Timer from "./Timer";
 import Math_Categories from "./Math_Categories";

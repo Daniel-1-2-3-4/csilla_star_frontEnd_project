@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Streak = () => {
-  const [streak, setStreak] = useState<number>(0);
+  const [streak] = useState<number>(0);
 
-  const fecthStreak = () => {};
+  //const fecthStreak = () => {};
 
   return (
     <div className="w-full h-fit flex text-[#510065] text-xl font-bold justify-start">

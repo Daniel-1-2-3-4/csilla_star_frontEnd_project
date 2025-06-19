@@ -1,8 +1,8 @@
 import Menu from "./Menu";
 import Subject from "./Subject";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-const fetchStarAmount = (subject: String) => {
+const fetchStarAmount = () => {
   //logic
   return 2; //star amount int
 };
@@ -18,7 +18,7 @@ const Content = () => {
           <Route
             key={"Route " + i}
             path={`/${e.toLowerCase()}`}
-            element={<Subject subject={e} starAmount={fetchStarAmount(e)} />}
+            element={<Subject subject={e} starAmount={fetchStarAmount()} />}
           />
         ))}
       </Routes>

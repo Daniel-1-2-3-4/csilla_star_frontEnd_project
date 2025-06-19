@@ -58,9 +58,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const fetchData = () => {
+//const fetchData = () => {
   //logic
-};
+//};
 
 export function SUbject_Stacked_BarChart() {
   return (

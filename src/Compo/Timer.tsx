@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 import { useEffect, useState, type FC } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation
+import { useNavigate } from "react-router-dom"; // Import useLocation
 
 interface TimerProps {
   subject: string;
@@ -20,7 +20,7 @@ const Timer: FC<TimerProps> = ({ subject }) => {
     });
     const timeElements = formattedDate.split("."); //[day,month,year]
     const dbDate = timeElements[2] + timeElements[1] + timeElements[0];
-    //if fetch failed 
+    //if fetch failed
     localStorage.setItem(subject, dbDate);
   };
 

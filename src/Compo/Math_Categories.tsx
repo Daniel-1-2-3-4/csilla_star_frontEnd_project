@@ -1,5 +1,5 @@
 import React, { useState, type FC } from "react";
-import axios from "axios";
+//import axios from "axios";
 
 const Math_Categories: FC = () => {
   const [checkedStates, setCheckedStates] = useState<Record<string, boolean>>(
@@ -180,7 +180,7 @@ const Math_Categories: FC = () => {
         `}
       >
         <div className="w-full h-full max-h-full overflow-y-auto">
-          {Object.entries(chapters).map(([chapterName, chapterData], i) => {
+          {Object.entries(chapters).map(([chapterName, chapterData]) => {
             if (typeof chapterData === "number") {
               return (
                 <div key={chapterName} className="mb-2">
