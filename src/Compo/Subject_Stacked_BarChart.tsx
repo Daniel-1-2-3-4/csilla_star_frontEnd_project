@@ -9,6 +9,29 @@ import {
   ChartLegendContent,
 } from "@/components/ui/chart";
 import type { ChartConfig } from "@/components/ui/chart";
+import type { FC } from "react";
+import DecryptedText from "./DecryptedText";
+
+type apiDataStackedBarChart = {
+  [date: string]: {
+    [subject: string]: number;
+  };
+};
+
+type ChartDataItemType = {
+  date: string;
+  Deutsch: number;
+  Englisch: number;
+  Gk: number;
+  Mathe: number;
+  Ethik: number;
+};
+
+interface SUbject_Stacked_BarChartProps {
+  barChartLoading: boolean;
+  barChartError: string | null;
+  barChartFetchedData: apiDataStackedBarChart | null;
+}
 
 const subjectColours = {
   Mathe: "#8B008B", // Dark Magenta (Distinct, slightly warmer, vibrant)
@@ -18,22 +41,41 @@ const subjectColours = {
   Ethik: "#22005A", // Very Dark Midnight Blue-Purple (Deepest, most blue-leaning for max distinction)
 };
 
-const chartData = [
-  {
-    day: "Mon",
-    Deutsch: 186,
-    GK: 80,
-    Englisch: 100,
-    Ethik: 120,
-  },
-  {
-    day: "Sun",
-    Deutsch: 186,
-    GK: 80,
-    Englisch: 100,
-    Ethik: 120,
-  },
-];
+const transformStackedChartData = (
+  apiData: apiDataStackedBarChart
+): ChartDataItemType[] => {
+  const transformedData: ChartDataItemType[] = [];
+  const allSubjects = ["Deutsch", "Englisch", "Gk", "Mathe", "Ethik"];
+
+  for (const date in apiData) {
+    if (Object.prototype.hasOwnProperty.call(apiData, date)) {
+      const subjectData = apiData[date];
+      const item: ChartDataItemType = {
+        date: date,
+        Deutsch: 0,
+        Englisch: 0,
+        Gk: 0,
+        Mathe: 0,
+        Ethik: 0,
+      };
+
+      for (const subject in subjectData) {
+        if (Object.prototype.hasOwnProperty.call(subjectData, subject)) {
+          if (allSubjects.includes(subject)) {
+            (item as any)[subject] = subjectData[subject];
+          }
+        }
+      }
+      transformedData.push(item);
+    }
+  }
+
+  transformedData.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
+  return transformedData;
+};
 
 const chartConfig = {
   Deutsch: {
@@ -58,11 +100,55 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-//const fetchData = () => {
-  //logic
-//};
+export const Subject_Stacked_BarChart: FC<SUbject_Stacked_BarChartProps> = ({
+  barChartLoading,
+  barChartError,
+  barChartFetchedData,
+}) => {
+  const chartData: ChartDataItemType[] =
+    barChartFetchedData != null
+      ? transformStackedChartData(barChartFetchedData)
+      : [];
 
-export function SUbject_Stacked_BarChart() {
+  //loading
+  if (barChartLoading) {
+    return (
+      <Card className="w-full h-full bg-pink-500/30 backdrop-blur-sm flex pointer-events-none justify-center items-center">
+        <DecryptedText
+          text="Loading Data..." // Corrected text
+          speed={100}
+          maxIterations={20}
+          characters="ABCD1234!.?"
+          sequential={true}
+          className="revealed"
+          animateOn="view"
+          revealDirection="start"
+          encryptedClassName="encrypted"
+        />
+      </Card>
+    );
+  }
+
+  //error
+  if (barChartError) {
+    return (
+      <Card className="w-full h-full bg-pink-500/30 backdrop-blur-sm flex pointer-events-none justify-center items-center">
+        <DecryptedText
+          text={`${barChartError}`}
+          speed={100}
+          maxIterations={20}
+          characters="ABCD1234!.?"
+          sequential={true}
+          className="revealed"
+          animateOn="view"
+          revealDirection="start"
+          encryptedClassName="encrypted"
+        />
+      </Card>
+    );
+  }
+
+  console.log(barChartFetchedData);
   return (
     <Card className="w-full h-full bg-pink-500/30 backdrop-blur-sm flex pointer-events-none justify-center items-center">
       <CardContent>
@@ -94,4 +180,4 @@ export function SUbject_Stacked_BarChart() {
       </CardContent>
     </Card>
   );
-}
+};

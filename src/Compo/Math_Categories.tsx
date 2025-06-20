@@ -1,4 +1,5 @@
 import React, { useState, type FC } from "react";
+import AnimatedList from "./AnimatedList";
 //import axios from "axios";
 
 const Math_Categories: FC = () => {
@@ -124,104 +125,55 @@ const Math_Categories: FC = () => {
     Gesamtübersicht_der_Codes_im_Buch: 6,
   };
 
+  //Content
+  const [items] = useState<string[]>([]);
+
   const formatDisplay = (text: string): string => {
     return text.replace(/_/g, " ").replace(/[1-8]/, "");
   };
 
-  const prepareChaptersForSending = (
-    originalChapters: Record<string, string | number>
-  ) => {
-    // Corrected type for filteredChapters
-    const filteredChapters: { [key: string]: boolean } = {}; // Or Record<string, boolean>
-
+  const loadIntoList = (originalChapters: Record<string, string | number>) => {
     for (const key in originalChapters) {
-      // Check if the value is not a string (i.e., it's a number, representing a sub-chapter)
-      if (typeof originalChapters[key] !== "string") {
-        filteredChapters[key] = false; // Now TypeScript knows 'key' is a string index and 'false' is a boolean value
-      }
-    }
-    return filteredChapters;
-  };
-
-  const postData = async (chapters: Record<string, string | number>) => {
-    const url = "http://localhost:8080/v1/mathprogress/api";
-    const dataToSend = prepareChaptersForSending(chapters);
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
-
-      if (!res.ok) {
-        //no internet
-      }
-    } catch (error) {
-      console.error("Error sending data:", error);
-      // You might want to throw the error again or return null/undefined
-      throw error; // Re-throw to allow calling code to handle it
+      items.push(`${originalChapters[key]} ${formatDisplay(key)}`);
     }
   };
 
   const handleClick = () => {
     setExtend(!extended);
-    postData(chapters);
+    loadIntoList(chapters);
+  };
+
+  const selectChapter = (item: String) => {
+    //POST
   };
 
   return (
-    <>
+    <div className="relative w-full h-full">
+      {/* Changed to relative and added overflow-hidden */}
       <div
         className={`
-          bg-black rounded-tr-3xl rounded-tl-3xl absolute text-white w-full h-full flex flex-col items-center p-2.5 overflow-x-hidden
-          transition-transform duration-500 ease-out z-0
-          ${extended ? "translate-y-0" : "translate-y-full"}
-        `}
+              bg-black rounded-tr-3xl rounded-tl-3xl absolute text-white w-full h-full flex flex-col items-center overflow-x-hidden
+              transition-transform duration-500 ease-out
+              ${extended ? "translate-y-0" : "translate-y-[100%]"}
+            `}
       >
-        <div className="w-full h-full max-h-full overflow-y-auto">
-          {Object.entries(chapters).map(([chapterName, chapterData]) => {
-            if (typeof chapterData === "number") {
-              return (
-                <div key={chapterName} className="mb-2">
-                  <div className="flex border-white border-b-2 w-full max-w-full h-fit pt-1 pb-1 justify-start items-center">
-                    <input
-                      type="checkbox"
-                      checked={checkedStates[chapterName] || false}
-                      onChange={(e) => handleCheckboxChange(e, chapterName)}
-                      className="mr-2"
-                    />
-                    <p
-                      className={` w-full max-w-full break-word ${
-                        checkedStates[chapterName] ? "line-through" : ""
-                      }`}
-                    >
-                      {`${chapterData}. ${formatDisplay(chapterName)}`}
-                    </p>
-                  </div>
-                </div>
-              );
-            } else if (typeof chapterData === "string") {
-              return (
-                <div key={chapterName} className="mt-4 ">
-                  <div className="w-full text-xl flex justify-start font-semibold">
-                    {`${chapterData} ${chapterName}`}
-                  </div>
-                </div>
-              );
-            }
-            return null;
-          })}
-        </div>
+        <AnimatedList
+          className={`max-w-full`}
+          items={items}
+          onItemSelect={(item) => selectChapter(item)}
+          showGradients={true}
+          enableArrowNavigation={true}
+          displayScrollbar={true}
+        />
       </div>
       <button
         type="button"
         onClick={handleClick}
-        className="w-full h-fit bg-pink-500 absolute bottom-0 text-xl text-white rounded-tr-2xl rounded-tl-2xl flex justify-center z-10"
+        className={`w-full bottom-0 h-fit bg-pink-500 absolute text-xl text-white rounded-tr-2xl rounded-tl-2xl flex justify-center z-10`}
       >
-        {extended == false ? "Extend" : "Collapse"}
+        {extended === false ? "Extend" : "Collapse"}
       </button>
-    </>
+    </div>
   );
 };
 

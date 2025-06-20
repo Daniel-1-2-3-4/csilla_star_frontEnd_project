@@ -5,20 +5,22 @@ import Sidebar from "./Compo/Sidebar";
 import Streak from "./Compo/Streak";
 
 const App = () => {
-
   // when internet connection POST locally stored data in backend
-  const postOldData = () =>{
+  const postOldData = () => {
     //logic
-  }
+  };
 
   return (
-    <div onLoad={()=>postOldData}
-      className=" absolute overflow-hidden h-[100dvh] w-[100dvw] bg-cover p-4 pr-0 outline-red-600"
+    <div
+      onLoad={() => postOldData}
+      className=" overflow-hidden absolute h-[100dvh] w-[100dvw] bg-cover px-4  flex-col"
       style={{ backgroundImage: `url(${skyBackground})` }}
     >
-      <Date></Date>
-      <Streak></Streak>
-      <div className="flex">
+      <div className="w-full flex flex-col justify-center h-[10dvh]">
+        <Date></Date>
+        <Streak></Streak>
+      </div>
+      <div className="flex p-0 h-[90dvh] w-full">
         <Content></Content>
         <Sidebar></Sidebar>
       </div>

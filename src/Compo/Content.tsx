@@ -11,7 +11,7 @@ const SubjectArray = ["Deutsch", "GK", "Englisch", "Ethik", "Mathe"];
 
 const Content = () => {
   return (
-    <div className="w-[90dvw] h-[90dvh]">
+    <div className="w-full h-full">
       <Routes>
         <Route key={"Route Menu"} path="/" element={<Menu></Menu>} />
         {SubjectArray.map((e, i) => (

@@ -42,7 +42,7 @@ const Sidebar = () => {
   }, [location]);
 
   return (
-    <div className="absolute h-[25dvh] min-w-fit flex flex-col justify-evenly right-[-1%] mt-[2dvh]">
+    <div className="absolute h-[25dvh] min-w-fit flex flex-col justify-evenly right-[-1px] mt-[2dvh]">
       {Object.entries(categorieState).map(([key, isSelected], i) => (
         <Subject_Menu_Label
           key={"Subject_Menu_Label_key_" + i}
