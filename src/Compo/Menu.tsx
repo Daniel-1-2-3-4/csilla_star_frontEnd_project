@@ -4,7 +4,7 @@ import { Subject_Stacked_BarChart } from "./Subject_Stacked_BarChart";
 import { ChartBarMixed } from "./SubjectBarChart";
 import axios, { type AxiosResponse } from "axios";
 import Loading from "./Loading";
-import Err from "./err";
+import Err from "./Errors";
 
 //JSON Aufbau
 type apiDataBarChart = {

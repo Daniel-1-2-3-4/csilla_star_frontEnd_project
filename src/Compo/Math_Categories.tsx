@@ -1,10 +1,10 @@
-import React, { useState, type FC } from "react";
+import { useState, type FC } from "react";
 import AnimatedList from "./AnimatedList";
 //import axios from "axios";
 
 const Math_Categories: FC = () => {
-  const [checkedStates, setCheckedStates] = useState<Record<string, boolean>>(
-    {}
+  /*const [checkedStates, setCheckedStates] = useState<Record<string, boolean>>(
+    
   );
 
   const handleCheckboxChange = (
@@ -17,7 +17,7 @@ const Math_Categories: FC = () => {
     }));
 
     //logic POST, PUT
-  };
+  };*/
 
   const [extended, setExtend] = useState<boolean>(false);
 
@@ -145,6 +145,7 @@ const Math_Categories: FC = () => {
 
   const selectChapter = (item: String) => {
     //POST
+    console.log(item);
   };
 
   return (

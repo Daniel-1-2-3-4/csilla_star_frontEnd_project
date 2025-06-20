@@ -147,7 +147,6 @@ const AnimatedList: React.FC<AnimatedListProps> = ({
     setKeyboardNav(false);
   }, [selectedIndex, keyboardNav]);
 
-  const num = ["1", "2", "3", "4"];
   return (
     <div className={`relative w-[500px] ${className}`}>
       <div
