@@ -17,7 +17,7 @@ const Subject: FC<SubjectProps> = ({ subject, starAmount }) => {
       </div>
       <p className="h-[15%]"></p>
       <div className="w-full h-[65%] flex flex-col justify-start items-center">
-        <div className="border-amber-100 border-2 rounded backdrop-blur-sm bg-pink-500/30 w-3/4 h-1/3 absolute">
+        <div className="border-amber-100- z-10 border-2 rounded backdrop-blur-sm bg-pink-500/30 w-3/4 h-1/3 absolute">
           <Timer subject={subject}></Timer>
         </div>
         {subject === "Mathe" ? (

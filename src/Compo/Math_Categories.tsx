@@ -127,6 +127,7 @@ const Math_Categories: FC = () => {
 
   //Content
   const [items] = useState<string[]>([]);
+  const [delayedExtend, setDelayedExtend] = useState<string>("z-0");
 
   const formatDisplay = (text: string): string => {
     return text.replace(/_/g, " ").replace(/[1-8]/, "");
@@ -137,10 +138,20 @@ const Math_Categories: FC = () => {
       items.push(`${originalChapters[key]} ${formatDisplay(key)}`);
     }
   };
+  const updateDelayedExtend = () => {
+    if (delayedExtend == "z-0") {
+      setDelayedExtend("z-20");
+    } else {
+      setTimeout(() => {
+        setDelayedExtend("z-0");
+      }, 1000);
+    }
+  };
 
   const handleClick = () => {
     setExtend(!extended);
     loadIntoList(chapters);
+    updateDelayedExtend();
   };
 
   const selectChapter = (item: String) => {
@@ -149,13 +160,13 @@ const Math_Categories: FC = () => {
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className={`relative w-full h-full ${delayedExtend}`}>
       {/* Changed to relative and added overflow-hidden */}
       <div
         className={`
               bg-black rounded-tr-3xl rounded-tl-3xl absolute text-white w-full h-full flex flex-col items-center overflow-x-hidden
               transition-transform duration-500 ease-out
-              ${extended ? "translate-y-0" : "translate-y-[100%]"}
+              ${extended ? "translate-y-0 " : "translate-y-[100%]"}
             `}
       >
         <AnimatedList

@@ -28,9 +28,9 @@ type ChartDataItemType = {
 };
 
 interface SUbject_Stacked_BarChartProps {
-  barChartLoading: boolean;
-  barChartError: string | null;
-  barChartFetchedData: apiDataStackedBarChart | null;
+  stackedBarChartLoading: boolean;
+  stackedBarChartError: string | null;
+  stackedBarChartFetchedData: apiDataStackedBarChart | null;
 }
 
 const subjectColours = {
@@ -101,17 +101,17 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export const Subject_Stacked_BarChart: FC<SUbject_Stacked_BarChartProps> = ({
-  barChartLoading,
-  barChartError,
-  barChartFetchedData,
+  stackedBarChartLoading,
+  stackedBarChartError,
+  stackedBarChartFetchedData,
 }) => {
   const chartData: ChartDataItemType[] =
-    barChartFetchedData != null
-      ? transformStackedChartData(barChartFetchedData)
+    stackedBarChartFetchedData != null
+      ? transformStackedChartData(stackedBarChartFetchedData)
       : [];
 
   //loading
-  if (barChartLoading) {
+  if (stackedBarChartLoading) {
     return (
       <Card className="w-full h-full bg-pink-500/30 backdrop-blur-sm flex pointer-events-none justify-center items-center">
         <DecryptedText
@@ -130,11 +130,11 @@ export const Subject_Stacked_BarChart: FC<SUbject_Stacked_BarChartProps> = ({
   }
 
   //error
-  if (barChartError) {
+  if (stackedBarChartError) {
     return (
       <Card className="w-full h-full bg-pink-500/30 backdrop-blur-sm flex pointer-events-none justify-center items-center">
         <DecryptedText
-          text={`${barChartError}`}
+          text={`${stackedBarChartError}`}
           speed={100}
           maxIterations={20}
           characters="ABCD1234!.?"
@@ -148,7 +148,7 @@ export const Subject_Stacked_BarChart: FC<SUbject_Stacked_BarChartProps> = ({
     );
   }
 
-  console.log(barChartFetchedData);
+  console.log(stackedBarChartFetchedData);
   return (
     <Card className="w-full h-full bg-pink-500/30 backdrop-blur-sm flex pointer-events-none justify-center items-center">
       <CardContent>

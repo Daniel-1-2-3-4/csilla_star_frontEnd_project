@@ -1,0 +1,27 @@
+1. POST bei Timer
+2. Timer auf 60min setzten
+
+------ DB aufräumen development Einträge löschen ------
+
+3. Alten Code anschauen -> wie wurden Daten im LocalStorage gespeichert
+4. Code entwickeln um alte Daten auf DB zu ziehen
+4.1 Cold stars verhindern
+4.2 Daten ohne WLan local speichern
+4.3 wenn wieder mit wlan verbunden -> POST
+
+             >>benutzbares Programm<<
+
+5. Mathe-Progress frontend Liste weiter entwickeln
+6. Mathe_Progress backend aufsetzten
+7. PUT bei frontend Listen Elementen
+8. Menu soll nun auch fetchData für Math_Progress_Stat managen
+
+            >>fertiges Programm<< -----------------vor ABI
+
+9. Design verbessern (responsive)
+10. Authorisierung
+
+------ Architektur verbessern und clean code ------
+------             WARTBARKEIT               ------
+
+11. ideen sammlung für neu Gestalung (studium fächer)
