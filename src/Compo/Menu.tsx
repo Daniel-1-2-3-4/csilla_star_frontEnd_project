@@ -33,10 +33,8 @@ interface StackedChartState {
 //URLs
 const Menu = () => {
   const URLS = {
-    barChart:
-      "https://csilla-star-backend-project.onrender.com/v1/subjectdate/api/hours",
-    stackedChart:
-      "https://csilla-star-backend-project.onrender.com/v1/subjectdate/api/dates", // REMEMBER TO CHANGE THIS
+    barChart: "http://localhost:8080/v1/subjectdate/api/hours",
+    stackedChart: "http://localhost:8080/v1/subjectdate/api/dates", // REMEMBER TO CHANGE THIS
     mathChart:
       "https://csilla-star-backend-project.onrender.com/v1/math/api/process-data", // REMEMBER TO CHANGE THIS
   };
@@ -104,7 +102,7 @@ const Menu = () => {
     }
   }
 
-  const fromatOldData = () => {
+  /*  const fromatOldData = () => {
     const oldData = localStorage.getItem("date");
     if (oldData) {
       const parsedData = JSON.parse(oldData);
@@ -161,7 +159,7 @@ const Menu = () => {
       return false;
     }
   };
-
+*/
   function wait(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
@@ -169,14 +167,11 @@ const Menu = () => {
   async function fetchAllChartDataSequentially() {
     try {
       await wait(1000);
-      const successLoaded1 = await fetchChartData<apiDataBarChart>(
-        URLS.barChart,
-        setBarChartState
-      );
+      await fetchChartData<apiDataBarChart>(URLS.barChart, setBarChartState);
       console.log("Bar Chart data fetch completed.");
 
       await wait(1000);
-      const susccessLoaded2 = await fetchChartData<apiDataStackedBarChart>(
+      await fetchChartData<apiDataStackedBarChart>(
         URLS.stackedChart,
         setStackedBarChartState
       );

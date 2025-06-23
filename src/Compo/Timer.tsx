@@ -1,5 +1,4 @@
 import axios from "axios";
-import { time } from "console";
 import { Star } from "lucide-react";
 import { useEffect, useState, type FC } from "react";
 import { useNavigate } from "react-router-dom"; // Import useLocation
@@ -19,11 +18,6 @@ const Timer: FC<TimerProps> = ({ subject }) => {
 
   const getTime = () => {
     const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleDateString("de-DE", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    });
     return currentDate.toISOString().substring(0, 10);
   };
 
@@ -126,7 +120,6 @@ const Timer: FC<TimerProps> = ({ subject }) => {
   const startTimer = () => {
     setIsStarted(true);
   };
-  
 
   return (
     <div className="w-full h-full flex items-center absolute flex-col justify-around">
