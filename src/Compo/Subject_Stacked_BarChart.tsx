@@ -35,7 +35,7 @@ interface SUbject_Stacked_BarChartProps {
 
 const subjectColours = {
   Mathe: "#8B008B", // Dark Magenta (Distinct, slightly warmer, vibrant)
-  GK: "#6A0DAD", // Dark Orchid (More purple-blue, noticeable shift)
+  Gk: "#6A0DAD", // Dark Orchid (More purple-blue, noticeable shift)
   Englisch: "#4B0082", // Indigo (Classic deep blue-purple, very rich)
   Deutsch: "#3B0B7D", // Deep Royal Violet (Strong, dark blue-purple)
   Ethik: "#22005A", // Very Dark Midnight Blue-Purple (Deepest, most blue-leaning for max distinction)
@@ -82,9 +82,9 @@ const chartConfig = {
     label: "Deutsch",
     color: `${subjectColours["Deutsch"]}`,
   },
-  GK: {
-    label: "GK",
-    color: `${subjectColours["GK"]}`,
+  Gk: {
+    label: "Gk",
+    color: `${subjectColours["Gk"]}`,
   },
   Englisch: {
     label: "Englisch",
@@ -147,8 +147,7 @@ export const Subject_Stacked_BarChart: FC<SUbject_Stacked_BarChartProps> = ({
       </Card>
     );
   }
-
-  console.log(stackedBarChartFetchedData);
+  // an sichr richtig console.log(stackedBarChartFetchedData);
   return (
     <Card className="w-full h-full bg-pink-500/30 backdrop-blur-sm flex pointer-events-none justify-center items-center">
       <CardContent>

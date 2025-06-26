@@ -7,8 +7,7 @@ const fetchStarAmount = () => {
   return 2; //star amount int
 };
 
-const SubjectArray = ["Deutsch", "GK", "Englisch", "Ethik", "Mathe"];
-
+const SubjectArray = ["Deutsch", "Gk", "Englisch", "Ethik", "Mathe"];
 const Content = () => {
   return (
     <div className="w-full h-full">

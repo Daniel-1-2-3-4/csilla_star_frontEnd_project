@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { useEffect, type FC } from "react";
 import type { Categories } from "./Sidebar";
 import { useNavigate } from "react-router-dom";
 
@@ -22,6 +22,17 @@ const Subject_Menu_Label: FC<Subject_Menu_LabelProps> = ({
       navigate(`/${Subject_Menu_name.toLowerCase()}`);
     }
   };
+
+  const reloadHandling = () => {
+    if (location.pathname != "/") {
+      navigate("/");
+      onSelect("Menü");
+    }
+  };
+
+  useEffect(() => {
+    reloadHandling();
+  }, []);
 
   return (
     <div

@@ -32,7 +32,7 @@ type ChartDataItemType = {
 
 const subjectColours = {
   Deutsch: "#8C0B55",
-  GK: "#7A0A4B",
+  Gk: "#7A0A4B",
   Englisch: "#680941",
   Ethik: "#560837",
   Mathe: "#44072D",
@@ -42,8 +42,8 @@ const chartConfig = {
   hours: {
     label: "hours",
   },
-  GK: {
-    label: "GK",
+  Gk: {
+    label: "Gk",
   },
   Deutsch: {
     label: "Deutsch",
@@ -121,6 +121,13 @@ export const ChartBarMixed: FC<SubjectBarChartProps> = ({
   return (
     <Card className="w-full h-full bg-pink-500/30 backdrop-blur-sm flex pointer-events-none justify-center items-center">
       <CardContent>
+        <p
+          className={`w-full h-[15%] bg-black/10 rounded flex items-center pl-5 text-white ${
+            barChartLoading ? "" : "hidden"
+          }`}
+        >
+          Loading...
+        </p>
         <ChartContainer config={chartConfig} className="w-full h-[19dvh]">
           <BarChart
             accessibilityLayer
@@ -149,8 +156,9 @@ export const ChartBarMixed: FC<SubjectBarChartProps> = ({
                 dataKey="subjectData" // Label for subject name on the left of the bar
                 position="insideLeft"
                 offset={8}
+                stroke="white"
                 className="fill-foreground" // Use your actual foreground color class
-                fontSize={12}
+                fontSize={15}
               />
               <LabelList
                 dataKey="hours" // Label for the hour value on the right of the bar

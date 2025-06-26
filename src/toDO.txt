@@ -5,9 +5,11 @@
 
 3. Alten Code anschauen -> wie wurden Daten im LocalStorage gespeichert
 4. Code entwickeln um alte Daten auf DB zu ziehen
+4.0.1 Daten nach get localstoren und nur wenn neuer post gemacht wurde aktualisieren
 4.1 Cold stars verhindern
 4.2 Daten ohne WLan local speichern
-4.3 wenn wieder mit wlan verbunden -> POST
+4.3 wenn wieder mit wlan verbunden -> POST davor menge der aktuell gespeicherten
+daten zuürckgeben und dann um zu wissen um post erfolgrecih war
 
              >>benutzbares Programm<<
 

@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 export interface Categories {
   Menü: boolean;
   Deutsch: boolean;
-  GK: boolean;
+  Gk: boolean;
   Englisch: boolean;
   Ethik: boolean;
   Mathe: boolean;
@@ -15,7 +15,7 @@ const Sidebar = () => {
   const [categorieState, setCategorieState] = useState<Categories>({
     Menü: true,
     Deutsch: false,
-    GK: false,
+    Gk: false,
     Englisch: false,
     Ethik: false,
     Mathe: false,
@@ -36,7 +36,14 @@ const Sidebar = () => {
 
   const location = useLocation();
   useEffect(() => {
-    if (location.pathname === "/") {
+    const locationName = location.pathname.replace("/", "");
+    const capitalizedLocationName =
+      locationName.charAt(0).toUpperCase() + locationName.slice(1);
+
+    // Only select if the category exists in Categories
+    if (capitalizedLocationName && capitalizedLocationName in categorieState) {
+      selectCategorie(capitalizedLocationName as keyof Categories);
+    } else {
       selectCategorie("Menü");
     }
   }, [location]);

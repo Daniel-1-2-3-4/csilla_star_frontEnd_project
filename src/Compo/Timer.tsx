@@ -2,6 +2,8 @@ import axios from "axios";
 import { Star } from "lucide-react";
 import { useEffect, useState, type FC } from "react";
 import { useNavigate } from "react-router-dom"; // Import useLocation
+import { incrementHoursByOne } from "./LocalDBMS/LocalServiceBarChart";
+import { UnsendData } from "./LocalDBMS/LocalServieUnsendBarCharts";
 
 type dataToSendType = {
   [key: string]: string;
@@ -19,14 +21,6 @@ const Timer: FC<TimerProps> = ({ subject }) => {
   const getTime = () => {
     const currentDate = new Date();
     return currentDate.toISOString().substring(0, 10);
-  };
-
-  const saveLocally = (subject: string) => {
-    const timeElements: string = getTime();
-    const dbDate = timeElements;
-    //if fetch failed
-    console.log("saved locally");
-    localStorage.setItem(subject, dbDate);
   };
 
   const postData = async (subjectName: string) => {
@@ -75,20 +69,24 @@ const Timer: FC<TimerProps> = ({ subject }) => {
     }
   };
 
-  const decideStorage = async () => {
-    const success: boolean = await postData(subject);
-    if (!success) {
-      saveLocally(subject);
+  const storeInDbAndLocal = async () => {
+    const successfullPost = await postData(subject);
+    if (!successfullPost) {
+      const date = getTime();
+      UnsendData.addUnSendSubject(subject, date);
     }
+    incrementHoursByOne(subject);
+
     setIsStarted(false);
     setTimeLeft(5);
     navigate("/");
   };
+
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
     if (isStarted) {
       if (timeLeft === 0) {
-        decideStorage();
+        storeInDbAndLocal();
         return;
       }
 
@@ -103,10 +101,8 @@ const Timer: FC<TimerProps> = ({ subject }) => {
   useEffect(() => {
     // This effect runs whenever 'subject' prop changes
     // It resets the timer state, regardless of whether it was running.
-    console.log(`Subject changed to: ${subject}. Resetting timer.`);
     setIsStarted(false); // Stop the timer if it was running
     setTimeLeft(5); // Reset time left
-    // No navigation here, as navigation should only happen when a timer *completes*
   }, [subject]);
 
   const formatTime = (seconds: number) => {
