@@ -27,7 +27,8 @@ export async function fetchChartData<T>(
       console.log("Request was aborted.");
       return;
     }
-    let errorMessage: string;
+    let errorMessage: string = "Error";
+    console.log("Error message for deployment" + errorMessage);
     if (axios.isAxiosError(error)) {
       errorMessage = error.response
         ? `Server error: ${error.response.status} - ${
